@@ -31,7 +31,7 @@ export default {
         Cell,
     },
     methods: {
-        markPosition(i,j) {
+        markPosition(i,j) { 
             if (this.turn && this.boardData[j][i] === ''){
                 this.boardData[j][i] = "X"
                 this.turn = !this.turn
