@@ -1,10 +1,12 @@
 <template>
 <h1>Tic-Tac-Toe</h1>
 
-
+<div v-if="gameOver">
+    <Modal :winner="winner" @close="closeModal()"/>
+  </div>
 
 <div class="boardDiv">
-  <Board/>
+  <Board @win="displayModal($event)" />
 </div>
 
 <div class="legend">
@@ -21,12 +23,32 @@
 
 <script>
 import Board from './components/Board.vue'
+import Modal from './components/Modal.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      winner: "",
+      gameOver: false,
+    }
+  },
   components: {
     Board,
+    Modal,
   },
+  methods: {
+    displayModal(e) {
+      if(e){this.winner = "X"}
+      else{this.winner = "O"}
+      this.gameOver = true
+    },
+    closeModal(){
+      this.winner = ""
+      this.gameOver = false;
+    }
+  },
+  
   
 }
 </script>
