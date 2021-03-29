@@ -1,8 +1,19 @@
 <template>
-<h1>Tic-Tac-Toe with a Twist</h1>
-<p>Can pick up your last piece and move it!</p>
+<h1>Tic-Tac-Toe</h1>
+
+
+
 <div class="boardDiv">
   <Board/>
+</div>
+
+<div class="legend">
+  <div class="glegend">
+    <h3>Open Cell</h3>
+  </div>
+  <div class="rlegend">
+    <h3>Can't Place</h3>
+  </div>
 </div>
 
 
@@ -36,5 +47,33 @@ h1{
 }
 .boardDiv{
   margin: auto;
+}
+.glegend{
+  padding: 10px;
+  border: 2px solid green;
+  border-radius: 10px;
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
+  display: inline-block;
+}
+.rlegend{
+  padding: 10px;
+  border: 2px solid red;
+  border-radius: 10px;
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
+  margin-left: 10px;
+  display: inline-block;
+}
+.legend{
+  padding: 15px;
+  border: 2px solid #2c3e50;
+  border-radius: 10px;
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
+  display: inline-block;
 }
 </style>

@@ -1,10 +1,18 @@
 <template>
+
+
 <div class="board">
+    <div class="Remaining">
+        <h2># of X's Remaining</h2>
+    </div>
     <div v-for="(n,i) in 3" :key="n.id">
         <div v-for="(n,j) in 3" :key="n.id">
             <Cell :value="boardData[j][i]" @mark="markPosition(i,j)" :owned="isOwned(i,j)" :openCell="isOpenCell(i,j)">
             </Cell>
         </div>
+    </div>
+    <div class="Remaining">
+        <h2># of O's Remaining</h2>
     </div>
 </div>
 <h3 v-if="turn">X's Turn</h3>
@@ -25,7 +33,8 @@ export default {
             ["","",""],
             ["","",""]],
             turn: true,
-
+            Xpieces: 3,
+            Opieces: 3,
              
         }
     },
@@ -63,6 +72,13 @@ export default {
     padding-top: 2%;
     display: inline-flex;
     flex-wrap: wrap;
+}
+.Remaining {
+    display: inline-block;
+    padding: 40px;
+}
+.Remaining h2 {
+    border-bottom: 1px solid #2c2c2c;
 }
 
 </style>
