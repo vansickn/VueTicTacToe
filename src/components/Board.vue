@@ -2,17 +2,11 @@
 
 
 <div class="board">
-    <div class="Remaining">
-        <h2># of X's Remaining</h2>
-    </div>
     <div v-for="(n,i) in 3" :key="n.id">
         <div v-for="(n,j) in 3" :key="n.id">
-            <Cell :value="boardData[j][i]" @mark="markPosition(i,j)" :owned="isOwned(i,j)" :openCell="isOpenCell(i,j)">
+            <Cell :value="boardData[j][i]" @mark="markPosition(i,j)" :cantPlace="cantPlace(i,j)" :openCell="isOpenCell(i,j)">
             </Cell>
         </div>
-    </div>
-    <div class="Remaining">
-        <h2># of O's Remaining</h2>
     </div>
 </div>
 <h3 v-if="turn">X's Turn</h3>
@@ -33,8 +27,11 @@ export default {
             ["","",""],
             ["","",""]],
             turn: true,
-            Xpieces: 3,
-            Opieces: 3,
+            piecesPlaced: 0,
+            c: 2,
+            ld: "",
+            rd: ""
+
              
         }
     },
@@ -46,15 +43,17 @@ export default {
             if (this.turn && this.boardData[j][i] === ''){
                 this.boardData[j][i] = "X"
                 this.turn = !this.turn
+                this.piecesPlaced += 1
             }else if(!this.turn && this.boardData[j][i] === ''){
                 this.boardData[j][i] = "O"
                 this.turn = !this.turn
+                this.piecesPlaced += 1
             }
+            this.winner()
             
         },
-        isOwned(i,j){
-            if(this.boardData[j][i] === "X" && this.turn === true){return true}
-            if(this.boardData[j][i] === "O" && this.turn === false){return true}
+        cantPlace(i,j){
+            if(this.boardData[j][i] !== ''){return true}
             else{
                 return false
             } 
@@ -62,6 +61,50 @@ export default {
         isOpenCell(i,j){
             if(this.boardData[j][i] === ''){return true}
             else{return false}
+        },
+        winner() {
+            console.log(!this.turn)
+            console.log(this.c)
+            if(this.piecesPlaced >= 5){
+                // Horizontal
+                for (let i = 0; i < this.boardData.length; i++) {
+                    if (this.boardData[i][0] + this.boardData[i][1] + this.boardData[i][2] === this.winningString()){this.$emit('win', !this.turn)} 
+                }
+                // Vertical
+                for (let j = 0; j <this.boardData.length; j++) {
+                    if (this.boardData[0][j] + this.boardData[1][j] + this.boardData[2][j] === this.winningString()){this.$emit('win', !this.turn)}
+                }
+                // Diagonal n = 3
+                
+                this.boardData.forEach(i => {
+                    this.rd += i[this.c]
+                    this.ld += i[i.length-(this.c)-1]
+                    this.c -= 1
+                });
+                if(this.ld === this.winningString() | this.rd === this.winningString()){this.$emit('win', !this.turn)}
+                else{
+                    this.c = 2
+                    this.ld = ""
+                    this.rd = ""
+                }
+            }
+            
+        },
+        winningString() {
+            // opposite of turn, because of click that changes turn back
+            if(this.turn){return "OOO"}
+            else{return "XXX"}
+        },
+        reset() {
+            this.boardData = 
+            [["","",""],
+            ["","",""],
+            ["","",""]],
+            this.turn = true,
+            this.piecesPlaced = 0,
+            this.c = 2,
+            this.ld = "",
+            this.rd = ""
         }
     }
 }
@@ -72,13 +115,6 @@ export default {
     padding-top: 2%;
     display: inline-flex;
     flex-wrap: wrap;
-}
-.Remaining {
-    display: inline-block;
-    padding: 40px;
-}
-.Remaining h2 {
-    border-bottom: 1px solid #2c2c2c;
 }
 
 </style>

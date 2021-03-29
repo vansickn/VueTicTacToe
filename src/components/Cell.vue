@@ -1,5 +1,5 @@
 <template>
-  <div class="cell" @click="markCell" @mouseover="highlightCell" @mouseleave="deHighlightCell" :class="{highlighted,owned,openCell}">
+  <div class="cell" @click="markCell" @mouseover="highlightCell" @mouseleave="deHighlightCell" :class="{highlighted,cantPlace,openCell}">
       <!-- Hacky fix to make the mouseover on the p to highlight as well but I don't know how to do it better! -->
       <p @mouseover="highlightCell"> {{value}} </p> 
   </div>
@@ -14,7 +14,7 @@ export default {
     },
     props: {
         value: String,
-        owned: Boolean,
+        cantPlace: Boolean,
         openCell: Boolean,
     },
     methods: {
@@ -45,7 +45,7 @@ export default {
 .highlighted{
     border-color: yellow;
 }
-.highlighted.owned{
+.highlighted.cantPlace{
     border-color: red;
 }
 .highlighted.openCell{
