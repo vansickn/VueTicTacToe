@@ -1,16 +1,22 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<h1>Tic-Tac-Toe with a Twist</h1>
+<p>Can pick up your last piece and move it!</p>
+<div class="boardDiv">
+  <Board/>
+</div>
+
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Board from './components/Board.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Board,
+  },
+  
 }
 </script>
 
@@ -22,5 +28,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+h1{
+  border-bottom: 2px solid #ddd;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+.boardDiv{
+  margin: auto;
 }
 </style>
