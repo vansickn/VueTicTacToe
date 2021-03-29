@@ -1,6 +1,7 @@
 <template>
-  <div class="cell" @click="markCell" @mouseover="highlightCell" @mouseleave="highlightCell" :class="{highlighted,owned,openCell}">
-      <p> {{value}} </p>
+  <div class="cell" @click="markCell" @mouseover="highlightCell" @mouseleave="deHighlightCell" :class="{highlighted,owned,openCell}">
+      <!-- Hacky fix to make the mouseover on the p to highlight as well but I don't know how to do it better! -->
+      <p @mouseover="highlightCell"> {{value}} </p> 
   </div>
 </template>
 
@@ -21,7 +22,10 @@ export default {
             this.$emit('mark')
         },
         highlightCell() {
-            this.highlighted = !this.highlighted
+            this.highlighted = true
+        },
+        deHighlightCell(){
+            this.highlighted = false
         }
     }
 }
@@ -46,5 +50,8 @@ export default {
 }
 .highlighted.openCell{
     border-color: rgb(5, 206, 5);
+}
+p {
+    user-select: none;
 }
 </style>
