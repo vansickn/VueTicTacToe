@@ -1,5 +1,5 @@
 <template>
-  <div class="cell" @click="markCell" @mouseover="highlightCell" @mouseleave="highlightCell" :class="{highlighted,owned}">
+  <div class="cell" @click="markCell" @mouseover="highlightCell" @mouseleave="highlightCell" :class="{highlighted,owned,openCell}">
       <p> {{value}} </p>
   </div>
 </template>
@@ -14,6 +14,7 @@ export default {
     props: {
         value: String,
         owned: Boolean,
+        openCell: Boolean,
     },
     methods: {
         markCell() {
@@ -42,5 +43,8 @@ export default {
 }
 .highlighted.owned{
     border-color: red;
+}
+.highlighted.openCell{
+    border-color: rgb(5, 206, 5);
 }
 </style>

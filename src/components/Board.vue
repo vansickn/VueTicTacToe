@@ -2,7 +2,7 @@
 <div class="board">
     <div v-for="(n,i) in 3" :key="n.id">
         <div v-for="(n,j) in 3" :key="n.id">
-            <Cell :value="boardData[j][i]" @mark="markPosition(i,j)" :owned="isOwned(i,j)">
+            <Cell :value="boardData[j][i]" @mark="markPosition(i,j)" :owned="isOwned(i,j)" :openCell="isOpenCell(i,j)">
             </Cell>
         </div>
     </div>
@@ -24,7 +24,9 @@ export default {
             [["","",""],
             ["","",""],
             ["","",""]],
-            turn: true 
+            turn: true,
+
+             
         }
     },
     components: {
@@ -47,6 +49,10 @@ export default {
             else{
                 return false
             } 
+        },
+        isOpenCell(i,j){
+            if(this.boardData[j][i] === ''){return true}
+            else{return false}
         }
     }
 }
