@@ -66,7 +66,12 @@ export default {
         winner() {
             console.log(!this.turn)
             console.log(this.c)
-            if(this.piecesPlaced >= 5){
+            if (this.piecesPlaced === 9){
+                console.log("HELLOOO")
+                this.$emit('draw',"tie")
+                this.reset()
+            }
+            else if(this.piecesPlaced >= 5){
                 // Horizontal
                 for (let i = 0; i < this.boardData.length; i++) {
                     if (this.boardData[i][0] + this.boardData[i][1] + this.boardData[i][2] === this.winningString()){

@@ -6,7 +6,7 @@
   </div>
 
 <div class="boardDiv">
-  <Board @win="displayModal($event)" />
+  <Board @win="displayModal($event)" @draw="displayModal($event)"/>
 </div>
 
 <div class="legend">
@@ -39,8 +39,10 @@ export default {
   },
   methods: {
     displayModal(e) {
-      if(e){this.winner = "X"}
-      else{this.winner = "O"}
+      console.log(e)
+      if(e == "tie"){this.winner = "No one"}
+      else if(e == true){this.winner = "X"}
+      else if(e == false){this.winner = "O"}
       this.gameOver = true
     },
     closeModal(){
