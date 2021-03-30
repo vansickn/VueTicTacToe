@@ -100,4 +100,10 @@ h1{
   margin: auto;
   display: inline-block;
 }
+h3{
+  user-select: none;
+}
+h1{
+  user-select: none;
+}
 </style>
