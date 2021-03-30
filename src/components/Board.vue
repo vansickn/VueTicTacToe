@@ -30,7 +30,8 @@ export default {
             piecesPlaced: 0,
             c: 2,
             ld: "",
-            rd: ""
+            rd: "",
+            RB: false
 
              
         }
@@ -68,11 +69,17 @@ export default {
             if(this.piecesPlaced >= 5){
                 // Horizontal
                 for (let i = 0; i < this.boardData.length; i++) {
-                    if (this.boardData[i][0] + this.boardData[i][1] + this.boardData[i][2] === this.winningString()){this.$emit('win', !this.turn)} 
+                    if (this.boardData[i][0] + this.boardData[i][1] + this.boardData[i][2] === this.winningString()){
+                        this.$emit('win', !this.turn)
+                        this.reset()
+                    } 
                 }
                 // Vertical
                 for (let j = 0; j <this.boardData.length; j++) {
-                    if (this.boardData[0][j] + this.boardData[1][j] + this.boardData[2][j] === this.winningString()){this.$emit('win', !this.turn)}
+                    if (this.boardData[0][j] + this.boardData[1][j] + this.boardData[2][j] === this.winningString()){
+                        this.$emit('win', !this.turn)
+                        this.reset()
+                    }
                 }
                 // Diagonal n = 3
                 
@@ -81,7 +88,10 @@ export default {
                     this.ld += i[i.length-(this.c)-1]
                     this.c -= 1
                 });
-                if(this.ld === this.winningString() | this.rd === this.winningString()){this.$emit('win', !this.turn)}
+                if(this.ld === this.winningString() | this.rd === this.winningString()){
+                    this.$emit('win', !this.turn)
+                    this.reset()
+                }
                 else{
                     this.c = 2
                     this.ld = ""

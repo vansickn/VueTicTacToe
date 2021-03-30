@@ -45,7 +45,7 @@ export default {
     },
     closeModal(){
       this.winner = ""
-      this.gameOver = false;
+      this.gameOver = false
     }
   },
   
